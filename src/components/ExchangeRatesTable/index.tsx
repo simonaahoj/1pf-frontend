@@ -21,11 +21,22 @@ export default function ExchangeRatesTable({ rates, filter }: RateProps) {
     setOrderByColumn("currency");
   }
 
+  function valBuyOrderByChanged(orderDirection: string) {
+    setOrderDirection(orderDirection);
+    setOrderByColumn("valBuy");
+  }
+
+  function valSellOrderByChanged(orderDirection: string) {
+    setOrderDirection(orderDirection);
+    setOrderByColumn("valSell");
+  }
   return (
     <Table striped bordered hover>
       <TableHeader
         setParentNameOrder={countryOrderByChanged}
         setParentCurrencyOrder={currencyOrderByChanged}
+        setParentValBuyOrder={valBuyOrderByChanged}
+        setParentValSellOrder={valSellOrderByChanged}
       />
       <tbody>
         {rates
@@ -43,6 +54,22 @@ export default function ExchangeRatesTable({ rates, filter }: RateProps) {
                 return country2.name.localeCompare(country1.name);
               } else {
                 return country1.name.localeCompare(country2.name);
+              }
+            }
+
+            if (orderByColumn === "valBuy") {
+              if (orderDirection === DESC) {
+                return country2.valBuy - country1.valBuy;
+              } else {
+                return country1.valBuy - country2.valBuy;
+              }
+            }
+
+            if (orderByColumn === "valSell") {
+              if (orderDirection === DESC) {
+                return country2.valBuy - country1.valBuy;
+              } else {
+                return country1.valBuy - country2.valBuy;
               }
             }
 

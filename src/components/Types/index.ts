@@ -21,4 +21,6 @@ export type RateProps = {
 export type TableHeaderProps = {
     setParentNameOrder: (order: string) => void;
     setParentCurrencyOrder: (order: string) => void;
+    setParentValBuyOrder: (order: string) => void;
+    setParentValSellOrder: (order: string) => void;
 }

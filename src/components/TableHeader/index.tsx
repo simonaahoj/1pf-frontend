@@ -7,11 +7,25 @@ import "./TableHeader.css";
 export default function TableHeader({
   setParentNameOrder,
   setParentCurrencyOrder,
+  setParentValBuyOrder,
+  setParentValSellOrder,
 }: TableHeaderProps) {
   const ASC = "ascending"; //a-z
   const DESC = "descending"; //z-a
   const [nameOrder, setNameOrder] = useState(ASC);
   const [currencyOrder, setCurrencyOrder] = useState(ASC);
+  const [valBuyOrder, setvalBuyOrder] = useState(ASC);
+  const [valSellOrder, setValSellOrder] = useState(ASC);
+
+  function onValSellClick() {
+    if (valSellOrder === ASC) {
+      setValSellOrder(DESC);
+      setParentValSellOrder(DESC);
+    } else {
+      setValSellOrder(ASC);
+      setParentValSellOrder(ASC);
+    }
+  }
 
   function onCountryClick() {
     if (nameOrder === ASC) {
@@ -32,6 +46,16 @@ export default function TableHeader({
       setParentCurrencyOrder(ASC);
     }
   }
+
+  function onValBuyClick() {
+    if (valBuyOrder === ASC) {
+      setvalBuyOrder(DESC);
+      setParentValBuyOrder(DESC);
+    } else {
+      setvalBuyOrder(ASC);
+      setParentValBuyOrder(ASC);
+    }
+  }
   return (
     <thead>
       <tr>
@@ -43,8 +67,13 @@ export default function TableHeader({
           Currency{ASC === currencyOrder ? <FaSortDown /> : <FaSortUp />}
         </th>
         <th className="amount">Quantity</th>
-        <th className="valBuy">Val. Buy</th>
-        <th className="valSell">Val. Sell</th>
+        <th className="valBuy" onClick={onValBuyClick}>
+          Val. Buy
+          {ASC === valBuyOrder ? <FaSortDown /> : <FaSortUp />}
+        </th>
+        <th className="valSell" onClick={onValSellClick}>
+          Val. Sell {ASC === valSellOrder ? <FaSortDown /> : <FaSortUp />}
+        </th>
         <th className="valMid">Val. Mid</th>
         <th className="currBuy">Curr. Buy</th>
         <th className="currSell">Curr. Sell</th>
